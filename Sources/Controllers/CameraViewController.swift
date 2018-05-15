@@ -98,6 +98,7 @@ public final class CameraViewController: UIViewController {
         }
         
         view.layer.addSublayer(videoPreviewLayer)
+        flashButton.isHidden = true
         view.addSubviews(settingsButton, flashButton, focusView, cameraButton)
         
         torchMode = .off
@@ -134,8 +135,8 @@ public final class CameraViewController: UIViewController {
         
         torchMode = .off
         captureSession.startRunning()
-        focusView.isHidden = false
-        flashButton.isHidden = captureDevice?.position == .front
+        focusView.isHidden = true
+        flashButton.isHidden = true
         cameraButton.isHidden = !showsCameraButton
     }
     
@@ -406,6 +407,7 @@ private extension CameraViewController {
         view.layer.shadowOpacity = 0.9
         view.layer.shadowOffset = CGSize.zero
         view.layer.masksToBounds = false
+        view.isHidden = true
         return view
     }
     
@@ -437,4 +439,3 @@ extension CameraViewController: AVCaptureMetadataOutputObjectsDelegate {
         delegate?.cameraViewController(self, didOutput: metadataObjects)
     }
 }
-
